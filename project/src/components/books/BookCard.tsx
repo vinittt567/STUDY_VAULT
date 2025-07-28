@@ -52,17 +52,18 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         <div className="flex gap-2">
           <button
             onClick={handleRead}
-            className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+            className="flex-1 bg-blue-600 text-white py-2 px-3 sm:px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-1 sm:gap-2 text-sm sm:text-base"
           >
             <BookOpen className="h-4 w-4" />
-            Read
+            <span className="hidden sm:inline">Read</span>
           </button>
           <button
             onClick={handleDownload}
-            className="bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+            className="bg-green-600 text-white py-2 px-3 sm:px-4 rounded-lg font-medium hover:bg-green-700 transition-colors flex items-center justify-center gap-1 sm:gap-2"
             title="Download PDF"
           >
             <Download className="h-4 w-4" />
+            <span className="hidden sm:inline">Download</span>
           </button>
         </div>
       </div>

@@ -28,8 +28,8 @@ export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children }) =>
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 1024) {
-                // On desktop, sidebar should be visible but not necessarily "open" in mobile sense
-                // We don't change isOpen state here to avoid conflicts with mobile toggle
+                // On desktop, sidebar is always visible, so we don't need to track "open" state
+                // The CSS handles the desktop layout automatically
             } else {
                 // On mobile, ensure sidebar is closed by default
                 setIsOpen(false);
@@ -43,7 +43,12 @@ export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children }) =>
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const toggle = () => setIsOpen(!isOpen);
+    const toggle = () => {
+        // Only toggle on mobile devices
+        if (window.innerWidth < 1024) {
+            setIsOpen(!isOpen);
+        }
+    };
     const close = () => setIsOpen(false);
     const open = () => setIsOpen(true);
 

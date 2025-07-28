@@ -25,7 +25,7 @@ const Header: React.FC = () => {
             <span className="text-xl font-bold text-gray-900">StudyVault</span>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <div className="hidden sm:flex items-center gap-2">
               <User className="h-5 w-5 text-gray-500" />
               <span className="text-sm font-medium text-gray-700">{user?.name}</span>
@@ -36,9 +36,19 @@ const Header: React.FC = () => {
               )}
             </div>
             
+            {/* Mobile user info */}
+            <div className="sm:hidden flex items-center gap-2">
+              <User className="h-5 w-5 text-gray-500" />
+              {user?.role === 'admin' && (
+                <span className="bg-purple-100 text-purple-800 text-xs px-1.5 py-0.5 rounded-full">
+                  A
+                </span>
+              )}
+            </div>
+            
             <button
               onClick={logout}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-2 px-2 sm:px-3 py-2 rounded-lg text-gray-600 hover:text-gray-800 hover:bg-gray-100 transition-colors"
             >
               <LogOut className="h-4 w-4" />
               <span className="hidden sm:inline text-sm">Logout</span>

@@ -18,7 +18,7 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <Header />
         <div className="flex h-screen pt-16">
           <Sidebar />
-          <main className="flex-1 overflow-auto lg:ml-0">
+          <main className="flex-1 overflow-auto">
             <div className="p-4 sm:p-6 lg:p-8">
               {children}
             </div>
