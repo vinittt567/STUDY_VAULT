@@ -27,7 +27,7 @@ const BookManagement: React.FC = () => {
       <h2 className="text-xl font-semibold text-gray-900 mb-6">Manage Books</h2>
       
       {/* Filters */}
-      <div className="flex gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <div className="flex-1">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -54,8 +54,8 @@ const BookManagement: React.FC = () => {
         </select>
       </div>
 
-      {/* Books Table */}
-      <div className="overflow-x-auto">
+      {/* Books Table - Mobile Responsive */}
+      <div className="hidden lg:block overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
@@ -128,6 +128,46 @@ const BookManagement: React.FC = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Card Layout */}
+      <div className="lg:hidden space-y-4">
+        {filteredBooks.map((book) => (
+          <div key={book.id} className="bg-white border border-gray-200 rounded-lg p-4">
+            <div className="flex items-start gap-4">
+              <img
+                src={book.coverImage}
+                alt={book.title}
+                className="h-20 w-16 object-cover rounded-lg flex-shrink-0"
+              />
+              <div className="flex-1 min-w-0">
+                <h3 className="font-medium text-gray-900 text-sm mb-1 line-clamp-2">
+                  {book.title}
+                </h3>
+                <div className="space-y-1 text-xs text-gray-600">
+                  <p><span className="font-medium">Subject:</span> {book.subject}</p>
+                  <p><span className="font-medium">Semester:</span> {book.semester}</p>
+                  <p><span className="font-medium">Author:</span> {book.author || 'N/A'}</p>
+                  <p><span className="font-medium">Uploaded:</span> {new Date(book.uploadDate).toLocaleDateString()}</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center justify-end gap-2 mt-4 pt-3 border-t border-gray-100">
+              <button className="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-50">
+                <Eye className="h-4 w-4" />
+              </button>
+              <button className="text-gray-600 hover:text-gray-800 p-2 rounded-lg hover:bg-gray-50">
+                <Edit className="h-4 w-4" />
+              </button>
+              <button 
+                onClick={() => handleDelete(book.id)}
+                className="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-50"
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
       {filteredBooks.length === 0 && (

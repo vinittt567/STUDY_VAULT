@@ -24,13 +24,15 @@ interface SidebarProviderProps {
 export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    // Close sidebar on mobile when clicking outside or on route change
+    // Handle sidebar state based on screen size
     useEffect(() => {
         const handleResize = () => {
             if (window.innerWidth >= 1024) {
-                setIsOpen(true); // Always open on desktop
+                // On desktop, sidebar should be visible but not necessarily "open" in mobile sense
+                // We don't change isOpen state here to avoid conflicts with mobile toggle
             } else {
-                setIsOpen(false); // Closed by default on mobile
+                // On mobile, ensure sidebar is closed by default
+                setIsOpen(false);
             }
         };
 
