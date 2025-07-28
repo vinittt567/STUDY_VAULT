@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useSidebar } from '../../context/SidebarContext';
-import { BookOpen, LogOut, User, Settings, Menu } from 'lucide-react';
+import { BookOpen, LogOut, User, Menu } from 'lucide-react';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();

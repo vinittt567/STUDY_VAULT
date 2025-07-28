@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import { supabase } from '../../lib/supabase';
-import { Upload, X, Check, AlertCircle, Bug } from 'lucide-react';
+import { Upload, Check, AlertCircle, Bug } from 'lucide-react';
 import { debugAuthStatus } from '../../utils/debugAuth';
 
 const BookUpload: React.FC = () => {

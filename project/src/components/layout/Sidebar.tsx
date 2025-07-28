@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { useSidebar } from '../../context/SidebarContext';
-import { Home, BookOpen, Settings, Users, Upload, X } from 'lucide-react';
+import { Home, BookOpen, Settings, X } from 'lucide-react';
 
 const Sidebar: React.FC = () => {
   const { user } = useAuth();

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
-import { Book } from '../../types';
 import { Edit, Trash2, Eye, Search } from 'lucide-react';
 
 const BookManagement: React.FC = () => {

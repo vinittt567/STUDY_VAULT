@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleUserProfile = async (authUser: any): Promise<void> => {
+  const handleUserProfile = async (authUser: { id: string; email?: string; user_metadata?: { full_name?: string; role?: string } }): Promise<void> => {
     try {
       console.log('👤 Handling user profile for:', authUser.id);
 
@@ -42,7 +42,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const { data: profile, error: profileError } = await Promise.race([
         profilePromise,
         timeoutPromise
-      ]) as any;
+      ]) as { data: { id: string; full_name: string; email: string | null; role: 'student' | 'admin' } | null; error: { code?: string; message?: string } | null };
 
       if (profileError && profileError.code === 'PGRST116') {
         // Profile doesn't exist, create it
@@ -158,7 +158,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     initializeAuth();
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: string, session: any) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event: string, session: { user?: { id: string; email?: string; user_metadata?: { full_name?: string; role?: string } } } | null) => {
       console.log('🔄 Auth state change:', event, session ? 'Session exists' : 'No session');
 
       if (!isMounted) return;

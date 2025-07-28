@@ -25,7 +25,7 @@ const checkSupabaseConnection = async () => {
   }
 };
 
-let supabase: any;
+let supabase: ReturnType<typeof createClient>;
 
 if (!supabaseUrl || !supabaseAnonKey) {
   console.error('❌ Missing Supabase environment variables!');
@@ -165,7 +165,7 @@ export type UserInsert = Database['public']['Tables']['users']['Insert'];
 export type BookInsert = Database['public']['Tables']['books']['Insert'];
 
 // Helper function to create user profile after signup
-export const createUserProfile = async (user: any) => {
+export const createUserProfile = async (user: { id: string; email?: string; user_metadata?: { full_name?: string; role?: string } }) => {
   try {
     console.log('🔧 Creating user profile for:', user.id);
     
@@ -186,7 +186,7 @@ export const createUserProfile = async (user: any) => {
       role: isAdmin ? 'admin' : 'student'
     });
 
-    const { data, error } = await supabase.from('users').upsert({
+    const { error } = await supabase.from('users').upsert({
       id: user.id,
       full_name: fullName,
       email: user.email,
